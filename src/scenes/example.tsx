@@ -1,11 +1,5 @@
-import { Line, makeScene2D } from '@motion-canvas/2d';
+import { makeScene2D } from '@motion-canvas/2d';
 import { Vector2, createRef, createSignal, easeOutBounce, tween, waitFor } from '@motion-canvas/core';
-
-class Stripe extends Line {
-
-
-
-}
 
 export default makeScene2D(function* (view) {
   // Create your animations here

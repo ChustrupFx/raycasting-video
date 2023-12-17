@@ -1,5 +1,5 @@
 import { Layout, Node, NodeProps, Rect, initial, signal } from "@motion-canvas/2d";
-import { SignalValue, SimpleSignal, createRefArray, easeInOutCubic, sequence, tween } from "@motion-canvas/core";
+import { SignalValue, SimpleSignal, Vector2, createRefArray, createSignal, easeInOutCubic, sequence, tween } from "@motion-canvas/core";
 
 type MapArray = number[][]
 
@@ -25,6 +25,8 @@ export class Map extends Node {
     @signal()
     public declare readonly mapArray: SimpleSignal<MapArray, this>;
 
+    public mapSize = createSignal(() => new Vector2(this.tileSize() * this.mapArray()[0].length, this.tileSize() * this.mapArray().length))
+
     private readonly rects = createRefArray<Rect>()
 
     private isShown: boolean
@@ -39,14 +41,14 @@ export class Map extends Node {
 
             <>
 
-                <Layout layout direction={"column"} gap={2} width={() => this.tileSize() * this.mapArray()[0].length} height={() => this.tileSize() * this.mapArray().length}>
+                <Layout layout direction={"column"} offset={-1} gap={2} width={() => this.tileSize() * this.mapArray()[0].length} height={() => this.tileSize() * this.mapArray().length}>
                     {this.mapArray().map((rows) => (
                         <Layout direction={"row"} gap={2} width={"100%"} height={"100%"}>
                             {rows.map((column) => (
                                 <Rect
                                     ref={this.rects}
                                     radius={3}
-                                    fill={column === 0 ? "black" : "red"}
+                                    fill={column === 0 ? "#090909" : "#F64740"}
                                     grow={1}
                                 />
                             ))}
