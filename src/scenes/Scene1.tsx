@@ -42,16 +42,16 @@ export default makeScene2D(function* (view) {
 
             <Player
                 ref={playerRef}
-                position={new Vector2(64 * 2 + 64 / 2, 64 * 5 + 64 / 2)}
+                position={mapRef().getCenterCoord()}
                 mapSettings={mapSettings}
                 directionNodeLength={100}
+
             />
         </Node>
     )
 
     group().position(mapRef().mapSize().div(-2))
 
-    playerRef().position(mapRef().getCenterCoord())
-
+    yield* playerRef().rotate(150, 2)
 
 })

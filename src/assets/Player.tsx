@@ -1,12 +1,14 @@
 import { Circle, Node, NodeProps, Ray, initial, signal, vector2Signal } from "@motion-canvas/2d";
 import { ColorSignal, SignalValue, SimpleSignal, Vector2, Vector2Signal, createRef } from "@motion-canvas/core";
 import { MapProps } from "./Map";
+import { PlayerPlane } from "./PlayerPlane";
 
 export interface PlayerProps extends NodeProps {
 
     radius?: SignalValue<number>
     mapSettings: SignalValue<MapProps>
     directionNodeLength?: SignalValue<number>
+    direction?: SignalValue<Vector2>
 }
 
 export class Player extends Node {
@@ -40,10 +42,9 @@ export class Player extends Node {
     constructor(props?: PlayerProps) {
         super({ ...props })
 
-
-
         this.add(
             <Node ref={this.nodeRef}>
+                <PlayerPlane direction={() => this.direction()} angle={33} />
                 <Circle
                     fill={() => this.color()}
                     width={() => this.radius() * 2}
