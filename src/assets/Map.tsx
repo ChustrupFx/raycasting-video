@@ -78,5 +78,25 @@ export class Map extends Node {
 
     }
 
+    public getDimensionsInTiles(): Vector2 {
+
+        let x = this.mapArray()[0].length
+        let y = this.mapArray().length
+
+        return new Vector2(x, y)
+
+    }
+
+    public getCenterCoord(): Vector2 {
+
+        const tileSize = this.tileSize()
+        const dimensionsInTiles = this.getDimensionsInTiles()
+
+        let x = dimensionsInTiles.x * tileSize / 2
+        let y = dimensionsInTiles.y * tileSize / 2
+
+        return new Vector2(x, y)
+    }
+
 
 }

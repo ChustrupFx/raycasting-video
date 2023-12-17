@@ -1,4 +1,4 @@
-import { Node, Txt, makeScene2D } from "@motion-canvas/2d";
+import { Node, makeScene2D } from "@motion-canvas/2d";
 import { Vector2, createRef, createSignal } from "@motion-canvas/core";
 import { Map, MapProps } from "../assets/Map";
 import { Player } from "../assets/Player";
@@ -40,13 +40,6 @@ export default makeScene2D(function* (view) {
                 {...mapSettings}
             />
 
-            <Txt
-                text={() => "Distância: " + length().toFixed(0)}
-                position={() => playerRef().position().sub(Vector2.down.mul(80))}
-                fill={"green"}
-                fontSize={28}
-            />
-
             <Player
                 ref={playerRef}
                 position={new Vector2(64 * 2 + 64 / 2, 64 * 5 + 64 / 2)}
@@ -57,6 +50,8 @@ export default makeScene2D(function* (view) {
     )
 
     group().position(mapRef().mapSize().div(-2))
+
+    playerRef().position(mapRef().getCenterCoord())
 
 
 })
